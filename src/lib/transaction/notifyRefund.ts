@@ -1,6 +1,9 @@
-import { RefundStatus } from ".";
+import {
+  NotifyTransactionBody,
+  NotifyTransactionHeaders,
+  RefundStatus,
+} from ".";
 import { WxPay } from "..";
-import { NotifyTransactionBody, NotifyTransactionHeaders } from "./notify";
 
 export interface NotifyTransactionRefund {
   /**

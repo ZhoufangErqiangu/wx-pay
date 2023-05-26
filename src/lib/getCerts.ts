@@ -1,6 +1,6 @@
+import { writeFileSync } from "fs";
 import { join } from "path";
 import { WxPay } from ".";
-import { writeFileSync } from "fs";
 
 export interface Cert {
   serial_no: string;

@@ -1,7 +1,7 @@
 import { verify } from "crypto";
-import { WxPay } from ".";
-import { join } from "path";
 import { readFileSync } from "fs";
+import { join } from "path";
+import { WxPay } from ".";
 
 export function checkSignature(
   this: WxPay,
