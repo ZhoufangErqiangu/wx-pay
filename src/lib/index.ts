@@ -44,6 +44,14 @@ export interface WxPayParam {
    */
   mchId: string;
   /**
+   * 异步接收微信支付结果通知的回调地址
+   *
+   * 通知url必须为外网可访问的url，不能携带参数。
+   *
+   * 公网域名必须为https
+   */
+  notifyUrl: string;
+  /**
    * 公钥文件夹
    *
    * 微信会定期或不定期更换公钥, 所以需要保存到文件夹里
@@ -93,6 +101,7 @@ export class WxPay {
   public appId: string;
   protected appSecret: string;
   public mchId: string;
+  public notifyUrl: string;
   public publicKeyDir: string;
   protected privateKey;
   public certSerial: string;
@@ -185,6 +194,7 @@ export class WxPay {
       appId,
       appSecret,
       mchId,
+      notifyUrl,
       publicKeyDir,
       privateKeyPath,
       certSerial,
@@ -198,6 +208,7 @@ export class WxPay {
     this.appId = appId;
     this.appSecret = appSecret;
     this.mchId = mchId;
+    this.notifyUrl = notifyUrl;
     this.publicKeyDir = publicKeyDir;
     this.privateKey = readFileSync(privateKeyPath, "utf-8");
     this.certSerial = certSerial;

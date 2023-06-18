@@ -18,7 +18,12 @@ export function postTransactionJsApi(this: WxPay, data: PostJSAPIData) {
   return this.request<PostJSAPIRes>({
     url: "/v3/pay/transactions/jsapi",
     method: "post",
-    data,
+    data: {
+      appid: this.appId,
+      mchid: this.mchId,
+      notify_url: "",
+      ...data,
+    },
   });
 }
 
@@ -33,7 +38,12 @@ export function postTransactionApp(this: WxPay, data: PostOrderData) {
   return this.request<APPPostOrderRes>({
     method: "POST",
     url: "/v3/pay/transactions/app",
-    data,
+    data: {
+      appid: this.appId,
+      mchid: this.mchId,
+      notify_url: "",
+      ...data,
+    },
   });
 }
 
@@ -48,7 +58,12 @@ export function postTransactionH5(this: WxPay, data: PostOrderData) {
   return this.request<PostH5Res>({
     method: "POST",
     url: "/v3/pay/transactions/h5",
-    data,
+    data: {
+      appid: this.appId,
+      mchid: this.mchId,
+      notify_url: "",
+      ...data,
+    },
   });
 }
 
@@ -63,6 +78,11 @@ export function postTransactionNative(this: WxPay, data: PostOrderData) {
   return this.request<PostNativeOrderRes>({
     method: "POST",
     url: "/v3/pay/transactions/native",
-    data,
+    data: {
+      appid: this.appId,
+      mchid: this.mchId,
+      notify_url: "",
+      ...data,
+    },
   });
 }

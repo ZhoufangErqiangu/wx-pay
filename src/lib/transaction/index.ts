@@ -120,11 +120,11 @@ export interface PostOrderData {
   /**
    * 应用ID
    */
-  appid: string;
+  appid?: string;
   /**
    * 直连商户号
    */
-  mchid: string;
+  mchid?: string;
   /**
    * 商品描述
    */
@@ -144,7 +144,7 @@ export interface PostOrderData {
   /**
    * 通知地址
    */
-  notify_url: string;
+  notify_url?: string;
   /**
    * 订单优惠标记
    */
