@@ -47,6 +47,7 @@ export interface QueryOrderRes {
 
 /**
  * 查询订单
+ * 
  * https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_2.shtml
  */
 export function queryTransaction(this: WxPay, id: string) {

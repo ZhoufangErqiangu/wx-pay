@@ -240,11 +240,11 @@ export interface RefundTransactionRes {
 
 /**
  * 申请退款
+ * 
  * https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_9.shtml
  */
 export function refundTransaction(
   this: WxPay,
-  id: string,
   data: RefundTransactionData,
 ) {
   return this.request<RefundTransactionRes>({

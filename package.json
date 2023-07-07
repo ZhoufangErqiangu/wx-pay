@@ -1,6 +1,6 @@
 {
   "name": "@liuhlightning/wx-pay",
-  "version": "0.0.3",
+  "version": "0.0.2",
   "description": "communicate to wx pay",
   "keywords": [
     "weichat",
@@ -23,8 +23,8 @@
   "packageManager": "yarn@1.22.19",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "test": "jest",
-    "publish": "npm publish"
+    "pub": "npm publish --access public",
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.21.5",

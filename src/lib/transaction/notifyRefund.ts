@@ -63,6 +63,7 @@ export interface NotifyTransactionRefund {
 
 /**
  * 退款结果通知
+ * 
  * https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_11.shtml
  */
 export type NotifyRefundHandler = (

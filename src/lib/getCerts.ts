@@ -20,6 +20,7 @@ export interface GetCertsRes {
 
 /**
  * 获取平台证书列表
+ * 
  * https://pay.weixin.qq.com/wiki/doc/apiv3/apis/wechatpay5_1.shtml
  */
 export async function getCerts(this: WxPay): Promise<void> {
@@ -27,10 +28,7 @@ export async function getCerts(this: WxPay): Promise<void> {
     url: "/v3/certificates",
     method: "get",
   });
-  if (status !== 200) {
-    console.error("获取证书错误", status);
-    return;
-  }
+  if (status !== 200) throw new Error(`获取证书错误 失败 ${status}`);
   const now = Date.now();
   for (const cert of data.data) {
     const expire = new Date(cert.expire_time).getTime();

@@ -12,6 +12,7 @@ export interface PostJSAPIRes {
 }
 /**
  * JSAPI下单 小程序支付也用这个接口
+ * 
  * https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_1.shtml
  */
 export function postTransactionJsApi(this: WxPay, data: PostJSAPIData) {
@@ -32,6 +33,7 @@ export interface APPPostOrderRes {
 }
 /**
  * APP下单
+ * 
  * https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_1.shtml
  */
 export function postTransactionApp(this: WxPay, data: PostOrderData) {
@@ -52,6 +54,7 @@ export interface PostH5Res {
 }
 /**
  * H5下单
+ * 
  * https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_3_1.shtml
  */
 export function postTransactionH5(this: WxPay, data: PostOrderData) {
@@ -72,6 +75,7 @@ export interface PostNativeOrderRes {
 }
 /**
  * Native下单
+ * 
  * https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_4_1.shtml
  */
 export function postTransactionNative(this: WxPay, data: PostOrderData) {
