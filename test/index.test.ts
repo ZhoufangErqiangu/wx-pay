@@ -5,7 +5,7 @@ import { AxiosHeaders } from "axios";
 
 const wxPay = new WxPay({
   appId: "",
-  appSecret: "",
+  apiv3Key: "",
   mchId: "1900009191",
   certSerial: "1DDE55AD98ED71D6EDD4A4A16996DE7B47773A8C",
   publicKeyDir: join(process.cwd(), "cert"),
