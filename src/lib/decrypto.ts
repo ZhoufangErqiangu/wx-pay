@@ -9,7 +9,7 @@ export function decrypto(
 ) {
   const d = createDecipheriv("aes-256-gcm", this.apiv3Key, nonce);
   const buf = Buffer.from(ciphertext, "base64");
-  const authTag = buf.subarray(16);
+  const authTag = buf.subarray(-16);
   const data = buf.subarray(0, -16);
   d.setAuthTag(authTag);
   d.setAAD(Buffer.from(associatedData));
