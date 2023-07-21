@@ -17,6 +17,7 @@ export interface PostJSAPIRes {
  */
 export async function postTransactionJsApi(this: WxPay, data: PostJSAPIData) {
   const {
+    status,
     data: { prepay_id },
   } = await this.request<PostJSAPIRes>({
     url: "/v3/pay/transactions/jsapi",
@@ -34,12 +35,15 @@ export async function postTransactionJsApi(this: WxPay, data: PostJSAPIData) {
   const signStr = `${this.appId}\n${timeStamp}\n${nonceStr}\n${pkg}\n`;
   const paySign = this.sign(signStr);
   return {
-    appId: this.appId,
-    timeStamp,
-    nonceStr,
-    package: pkg,
-    signType: "RSA",
-    paySign,
+    status,
+    data: {
+      appId: this.appId,
+      timeStamp,
+      nonceStr,
+      package: pkg,
+      signType: "RSA",
+      paySign,
+    },
   };
 }
 
