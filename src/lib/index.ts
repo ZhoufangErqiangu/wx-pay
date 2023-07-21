@@ -64,7 +64,7 @@ export interface WxPayParam {
    */
   privateKeyPath: string;
   /**
-   * 平台证书序列号
+   * 商户证书序列号
    */
   certSerial: string;
   /**
