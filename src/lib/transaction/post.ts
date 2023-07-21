@@ -12,20 +12,35 @@ export interface PostJSAPIRes {
 }
 /**
  * JSAPI下单 小程序支付也用这个接口
- * 
+ *
  * https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_1.shtml
  */
-export function postTransactionJsApi(this: WxPay, data: PostJSAPIData) {
-  return this.request<PostJSAPIRes>({
+export async function postTransactionJsApi(this: WxPay, data: PostJSAPIData) {
+  const {
+    data: { prepay_id },
+  } = await this.request<PostJSAPIRes>({
     url: "/v3/pay/transactions/jsapi",
     method: "post",
     data: {
       appid: this.appId,
       mchid: this.mchId,
-      notify_url: "",
+      notify_url: this.notifyUrl,
       ...data,
     },
   });
+  const timeStamp = this.timestamp;
+  const nonceStr = this.nonceStr;
+  const pkg = `prepay_id=${prepay_id}`;
+  const signStr = `${this.appId}\n${timeStamp}\n${nonceStr}\n${pkg}\n`;
+  const paySign = this.sign(signStr);
+  return {
+    appId: this.appId,
+    timeStamp,
+    nonceStr,
+    package: pkg,
+    signType: "RSA",
+    paySign,
+  };
 }
 
 export interface APPPostOrderRes {
@@ -33,7 +48,7 @@ export interface APPPostOrderRes {
 }
 /**
  * APP下单
- * 
+ *
  * https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_1.shtml
  */
 export function postTransactionApp(this: WxPay, data: PostOrderData) {
@@ -43,7 +58,7 @@ export function postTransactionApp(this: WxPay, data: PostOrderData) {
     data: {
       appid: this.appId,
       mchid: this.mchId,
-      notify_url: "",
+      notify_url: this.notifyUrl,
       ...data,
     },
   });
@@ -54,7 +69,7 @@ export interface PostH5Res {
 }
 /**
  * H5下单
- * 
+ *
  * https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_3_1.shtml
  */
 export function postTransactionH5(this: WxPay, data: PostOrderData) {
@@ -64,7 +79,7 @@ export function postTransactionH5(this: WxPay, data: PostOrderData) {
     data: {
       appid: this.appId,
       mchid: this.mchId,
-      notify_url: "",
+      notify_url: this.notifyUrl,
       ...data,
     },
   });
@@ -75,7 +90,7 @@ export interface PostNativeOrderRes {
 }
 /**
  * Native下单
- * 
+ *
  * https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_4_1.shtml
  */
 export function postTransactionNative(this: WxPay, data: PostOrderData) {
@@ -85,7 +100,7 @@ export function postTransactionNative(this: WxPay, data: PostOrderData) {
     data: {
       appid: this.appId,
       mchid: this.mchId,
-      notify_url: "",
+      notify_url: this.notifyUrl,
       ...data,
     },
   });
