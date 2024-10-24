@@ -36,9 +36,9 @@ export interface WxPayParam {
    */
   appId: string;
   /**
-   * app密钥 在微信开放平台申请
+   * APIv3密钥 在商户平台设置
    */
-  appSecret: string;
+  apiv3Key: string;
   /**
    * 商户ID 在微信支付申请
    */
@@ -52,7 +52,7 @@ export interface WxPayParam {
    */
   notifyUrl: string;
   /**
-   * 公钥文件夹
+   * 平台证书公钥文件夹
    *
    * 微信会定期或不定期更换公钥, 所以需要保存到文件夹里
    *
@@ -60,11 +60,11 @@ export interface WxPayParam {
    */
   publicKeyDir: string;
   /**
-   * 密钥文件地址
+   * 商户API私钥文件地址
    */
   privateKeyPath: string;
   /**
-   * 证书编号
+   * 商户证书序列号
    */
   certSerial: string;
   /**
@@ -99,7 +99,7 @@ export interface WxPayParam {
 export class WxPay {
   public baseURL = "https://api.mch.weixin.qq.com";
   public appId: string;
-  protected appSecret: string;
+  protected apiv3Key: string;
   public mchId: string;
   public notifyUrl: string;
   public publicKeyDir: string;
@@ -192,7 +192,7 @@ export class WxPay {
   constructor(param: WxPayParam) {
     const {
       appId,
-      appSecret,
+      apiv3Key,
       mchId,
       notifyUrl,
       publicKeyDir,
@@ -206,7 +206,7 @@ export class WxPay {
       debug = false,
     } = param;
     this.appId = appId;
-    this.appSecret = appSecret;
+    this.apiv3Key = apiv3Key;
     this.mchId = mchId;
     this.notifyUrl = notifyUrl;
     this.publicKeyDir = publicKeyDir;

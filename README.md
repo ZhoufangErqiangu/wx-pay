@@ -1,1 +1,1 @@
-# wx-mp
+# wx-pay

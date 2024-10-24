@@ -1,3 +1,4 @@
 *
 !.gitignore
-!test.key
+!test.pem
+!test.pub

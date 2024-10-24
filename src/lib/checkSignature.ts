@@ -15,7 +15,7 @@ export function checkSignature(
   body: any,
   signature: string,
 ) {
-  const publicKeyPath = join(this.publicKeyDir, `${certSerial}.key`);
+  const publicKeyPath = join(this.publicKeyDir, `${certSerial}.pem`);
   const publicKey = readFileSync(publicKeyPath, "utf-8");
   const data = JSON.stringify(body);
   const v = Buffer.from(`${time}\n${nonceStr}\n${data}\n`);

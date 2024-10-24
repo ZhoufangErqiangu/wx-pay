@@ -3,6 +3,7 @@ import { WxPay } from "..";
 
 /**
  * 签名验证
+ * 
  * https://pay.weixin.qq.com/wiki/doc/apiv3/wechatpay/wechatpay4_1.shtml
  */
 export interface NotifyTransactionHeaders {
@@ -214,6 +215,7 @@ export interface NotifyTransaction {
 
 /**
  * 支付通知
+ * 
  * https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_5.shtml
  */
 export type NotifyTransactionHandler = (
