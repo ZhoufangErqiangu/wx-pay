@@ -232,17 +232,17 @@ export class WxPay {
     this.debug = debug;
     if (this.debug) {
       this.service.interceptors.request.use((config) => {
-        console.log("wx pay request url    ", config.url);
-        console.log("wx pay request method ", config.method);
-        console.log("wx pay request params ", config.params);
-        console.log("wx pay request headers", config.headers);
-        console.log("wx pay request data   ", config.data);
+        console.debug("wx pay request url    ", config.url);
+        console.debug("wx pay request method ", config.method);
+        console.debug("wx pay request params ", config.params);
+        console.debug("wx pay request headers", config.headers);
+        console.debug("wx pay request data   ", config.data);
         return config;
       });
       this.service.interceptors.response.use((res) => {
-        console.log("wx pay response status ", res.status);
-        console.log("wx pay response headers", res.headers);
-        console.log("wx pay response data   ", res.data);
+        console.debug("wx pay response status ", res.status);
+        console.debug("wx pay response headers", res.headers);
+        console.debug("wx pay response data   ", res.data);
         return res;
       });
     }
