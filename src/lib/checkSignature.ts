@@ -14,7 +14,7 @@ export function checkSignature(
   body: unknown,
   signature: string,
 ) {
-  const publicKeyPath = join(this.wxPayCertDir, `wx_pay_cert_${wxPayCertSerial}.pem`);
+  const publicKeyPath = join(this.wxPayCertDir, `${wxPayCertSerial}.pem`);
   const publicKey = readFileSync(publicKeyPath, "utf-8");
   const data = JSON.stringify(body);
   const v = Buffer.from(`${time}\n${nonceStr}\n${data}\n`);
