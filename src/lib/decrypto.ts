@@ -1,4 +1,4 @@
-import { createDecipheriv } from "crypto";
+import { createDecipheriv, privateDecrypt, constants } from "crypto";
 import { WxPay } from ".";
 
 export function decrypto(
@@ -16,4 +16,15 @@ export function decrypto(
   const res = d.update(data, undefined, "utf8");
   d.final();
   return res;
+}
+
+export function decryptoByPrivateKey(this: WxPay, ciphertext: string) {
+  const c = privateDecrypt(
+    {
+      key: this.privateKey,
+      padding: constants.RSA_PKCS1_OAEP_PADDING,
+    },
+    Buffer.from(ciphertext, "base64"),
+  );
+  return c.toString("utf-8");
 }

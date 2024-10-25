@@ -1,18 +1,20 @@
 import { expect, test } from "@jest/globals";
-import { WxPay } from "../src";
-import { join } from "path";
 import { AxiosHeaders } from "axios";
+import { join } from "path";
+import { WxPay } from "../src";
 
 const wxPay = new WxPay({
   appId: "",
   apiv3Key: "",
   mchId: "1900009191",
   certSerial: "1DDE55AD98ED71D6EDD4A4A16996DE7B47773A8C",
-  publicKeyDir: join(process.cwd(), "cert"),
-  privateKeyPath: join(process.cwd(), "cert/test.key"),
+  wxPayCertDir: join(process.cwd(), "cert"),
+  privateKeyPath: join(process.cwd(), "cert/test.pem"),
   notifyUrl: "",
+  autoGetCert: false,
 });
 
+// this will fail because we do not know the private key
 test("sign", () => {
   expect(
     wxPay

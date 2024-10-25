@@ -1,6 +1,6 @@
 {
   "name": "@liuhlightning/wx-pay",
-  "version": "0.0.5",
+  "version": "0.1.1",
   "description": "communicate to wx pay",
   "keywords": [
     "weichat",
@@ -13,7 +13,10 @@
   ],
   "license": "MIT",
   "author": "Alex",
-  "repository": "https://github.com/ZhoufangErqiangu/wx-pay",
+  "repository": {
+    "url": "https://github.com/ZhoufangErqiangu/wx-pay",
+    "type": "git"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -24,6 +27,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "pub": "npm publish --access public",
+    "push": "yarn version --patch && git push",
     "test": "jest"
   },
   "devDependencies": {

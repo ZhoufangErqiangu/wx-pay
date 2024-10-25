@@ -34,7 +34,10 @@ export function requestInterceptorBuilder(
     const signature = this.sign(signStr);
     const authorization = `WECHATPAY2-SHA256-RSA2048 mchid="${this.mchId}",nonce_str="${nonceStr}",signature="${signature}",timestamp="${timestamp}",serial_no="${this.certSerial}"`;
     req.headers.set("Authorization", authorization);
-    req.headers.set("Wechatpay-Serial", this.certSerial);
+    req.headers.set("serial_no", this.certSerial);
+    // if (this.wxPayCertSerial) {
+    //   req.headers.set("Wechatpay-Serial", this.wxPayCertSerial);
+    // }
     return req;
   };
 }
