@@ -11,8 +11,7 @@ export function checkSignature(
   certSerial: string,
   time: string,
   nonceStr: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  body: any,
+  body: unknown,
   signature: string,
 ) {
   const publicKeyPath = join(this.publicKeyDir, `${certSerial}.pem`);
