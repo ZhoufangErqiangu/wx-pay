@@ -13,7 +13,10 @@
   ],
   "license": "MIT",
   "author": "Alex",
-  "repository": "https://github.com/ZhoufangErqiangu/wx-pay",
+  "repository": {
+    "url": "https://github.com/ZhoufangErqiangu/wx-pay",
+    "type": "git"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
