@@ -11,6 +11,7 @@ const wxPay = new WxPay({
   publicKeyDir: join(process.cwd(), "cert"),
   privateKeyPath: join(process.cwd(), "cert/test.pem"),
   notifyUrl: "",
+  autoGetCert: false,
 });
 
 test("sign", () => {
