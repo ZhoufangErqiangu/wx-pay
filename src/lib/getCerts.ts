@@ -23,7 +23,7 @@ export interface GetCertsRes {
  *
  * https://pay.weixin.qq.com/wiki/doc/apiv3/apis/wechatpay5_1.shtml
  */
-export async function getCerts(this: WxPay): Promise<void> {
+export async function getCerts(this: WxPay): Promise<Cert[]> {
   const { status, data } = await this.request<GetCertsRes>({
     url: "/v3/certificates",
     method: "get",
@@ -35,7 +35,8 @@ export async function getCerts(this: WxPay): Promise<void> {
     if (now > expire) continue;
     const r = cert.encrypt_certificate;
     const content = this.decrypto(r.nonce, r.ciphertext, r.associated_data);
-    const path = join(this.publicKeyDir, `${cert.serial_no}.pem`);
+    const path = join(this.wxPayCertDir, `${cert.serial_no}.pem`);
     writeFileSync(path, content);
   }
+  return data.data;
 }

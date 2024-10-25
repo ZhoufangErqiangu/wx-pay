@@ -10,7 +10,8 @@ import { normalizeUrl } from "../util/normalizeUrl";
 import { paramsToString } from "../util/paramsToString";
 import { timestamp } from "../util/timestamp";
 import { checkSignature } from "./checkSignature";
-import { decrypto } from "./decrypto";
+import { decrypto, decryptoByPrivateKey } from "./decrypto";
+import { encrypto } from "./encrypto";
 import { getCerts } from "./getCerts";
 import { requestInterceptorBuilder } from "./interceptor";
 import { sign } from "./sign";
@@ -37,6 +38,8 @@ export interface WxPayParam {
   appId: string;
   /**
    * APIv3密钥 在商户平台设置
+   *
+   * 为了保证安全性，微信支付在回调通知和平台证书下载接口中，对关键信息进行了AES-256-GCM加密。API v3密钥是加密时使用的对称密钥。
    */
   apiv3Key: string;
   /**
@@ -52,15 +55,17 @@ export interface WxPayParam {
    */
   notifyUrl: string;
   /**
-   * 平台证书公钥文件夹
+   * 平台证书文件夹
    *
-   * 微信会定期或不定期更换公钥, 所以需要保存到文件夹里
+   * 微信会定期或不定期更换平台证书, 所以需要保存到文件夹里
    *
-   * 验证签名时, 会从此文件夹读取公钥
+   * 验证签名时, 会从此文件夹读取证书，使用其中的公钥
    */
-  publicKeyDir: string;
+  wxPayCertDir: string;
   /**
    * 商户API私钥文件地址
+   *
+   * 商户申请商户API证书时，会生成商户私钥，并保存在本地证书文件夹的文件apiclient_key.pem中。私钥也可以通过工具从商户的p12证书中导出。请妥善保管好你的商户私钥文件。
    */
   privateKeyPath: string;
   /**
@@ -102,7 +107,7 @@ export class WxPay {
   protected apiv3Key: string;
   public mchId: string;
   public notifyUrl: string;
-  public publicKeyDir: string;
+  public wxPayCertDir: string;
   protected privateKey;
   public certSerial: string;
   public supportFapiao: boolean;
@@ -132,9 +137,17 @@ export class WxPay {
    */
   public checkSignature = checkSignature;
   /**
-   * 解密
+   * 解密, api v3 key
    */
   public decrypto = decrypto;
+  /**
+   * 加密, wx pay platform cert public key
+   */
+  public encrypto = encrypto;
+  /**
+   * 解密, private key
+   */
+  public decryptoByPrivateKey = decryptoByPrivateKey;
   /**
    * jsapi下单
    * 小程序下单
@@ -195,7 +208,7 @@ export class WxPay {
       apiv3Key,
       mchId,
       notifyUrl,
-      publicKeyDir,
+      wxPayCertDir,
       privateKeyPath,
       certSerial,
       supportFapiao = false,
@@ -209,7 +222,9 @@ export class WxPay {
     this.apiv3Key = apiv3Key;
     this.mchId = mchId;
     this.notifyUrl = notifyUrl;
-    this.publicKeyDir = publicKeyDir;
+
+    // wx pay cert
+    this.wxPayCertDir = wxPayCertDir;
     this.privateKey = readFileSync(privateKeyPath, "utf-8");
     this.certSerial = certSerial;
     this.supportFapiao = supportFapiao;

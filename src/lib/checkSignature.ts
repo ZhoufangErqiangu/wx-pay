@@ -8,13 +8,13 @@ export function checkSignature(
   /**
    * 这是微信通知时发的证书序列号, 不是配置输入的
    */
-  certSerial: string,
+  wxPayCertSerial: string,
   time: string,
   nonceStr: string,
   body: unknown,
   signature: string,
 ) {
-  const publicKeyPath = join(this.publicKeyDir, `${certSerial}.pem`);
+  const publicKeyPath = join(this.wxPayCertDir, `wx_pay_cert_${wxPayCertSerial}.pem`);
   const publicKey = readFileSync(publicKeyPath, "utf-8");
   const data = JSON.stringify(body);
   const v = Buffer.from(`${time}\n${nonceStr}\n${data}\n`);
