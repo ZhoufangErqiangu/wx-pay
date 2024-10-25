@@ -28,7 +28,7 @@ export async function getCerts(this: WxPay): Promise<void> {
     url: "/v3/certificates",
     method: "get",
   });
-  if (status !== 200) throw new Error(`获取证书错误 失败 ${status}`);
+  if (status !== 200) throw new Error(`get certs fail ${status}`);
   const now = Date.now();
   for (const cert of data.data) {
     const expire = new Date(cert.expire_time).getTime();
