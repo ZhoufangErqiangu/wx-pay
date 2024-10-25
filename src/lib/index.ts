@@ -12,7 +12,6 @@ import { timestamp } from "../util/timestamp";
 import { checkSignature } from "./checkSignature";
 import { decrypto, decryptoByPrivateKey } from "./decrypto";
 import { encrypto } from "./encrypto";
-import { getCerts } from "./getCerts";
 import { requestInterceptorBuilder } from "./interceptor";
 import { sign } from "./sign";
 import {
@@ -55,13 +54,9 @@ export interface WxPayParam {
    */
   notifyUrl: string;
   /**
-   * 平台证书文件夹
-   *
-   * 微信会定期或不定期更换平台证书, 所以需要保存到文件夹里
-   *
-   * 验证签名时, 会从此文件夹读取证书，使用其中的公钥
+   * 微信支付公钥文件地址
    */
-  wxPayCertDir: string;
+  wxPayPublicKeyPath: string;
   /**
    * 商户API私钥文件地址
    *
@@ -107,7 +102,7 @@ export class WxPay {
   protected apiv3Key: string;
   public mchId: string;
   public notifyUrl: string;
-  public wxPayCertDir: string;
+  public wxPayPublicKey: string;
   protected privateKey;
   public certSerial: string;
   public supportFapiao: boolean;
@@ -197,10 +192,6 @@ export class WxPay {
    * 查询退款
    */
   public queryRefund = queryRefund;
-  /**
-   * 获取证书
-   */
-  public getCerts = getCerts;
 
   constructor(param: WxPayParam) {
     const {
@@ -208,11 +199,10 @@ export class WxPay {
       apiv3Key,
       mchId,
       notifyUrl,
-      wxPayCertDir,
+      wxPayPublicKeyPath,
       privateKeyPath,
       certSerial,
       supportFapiao = false,
-      autoGetCert = true,
       baseURL,
       timeout = 10000,
       axiosConfig = {},
@@ -222,9 +212,7 @@ export class WxPay {
     this.apiv3Key = apiv3Key;
     this.mchId = mchId;
     this.notifyUrl = notifyUrl;
-
-    // wx pay cert
-    this.wxPayCertDir = wxPayCertDir;
+    this.wxPayPublicKey = readFileSync(wxPayPublicKeyPath, "utf-8");
     this.privateKey = readFileSync(privateKeyPath, "utf-8");
     this.certSerial = certSerial;
     this.supportFapiao = supportFapiao;
@@ -237,12 +225,6 @@ export class WxPay {
     });
     this.service.interceptors.request.use(this.requestInterceptorBuilder());
     this.request = this.service.request;
-    // auto get cert
-    if (autoGetCert) {
-      this.getCerts().catch((err) => {
-        console.error("wx pay get certs error", err);
-      });
-    }
     // debug
     this.debug = debug;
     if (this.debug) {

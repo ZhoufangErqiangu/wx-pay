@@ -63,7 +63,7 @@ export interface NotifyTransactionRefund {
 
 /**
  * 退款结果通知
- * 
+ *
  * https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_11.shtml
  */
 export type NotifyRefundHandler = (
@@ -76,12 +76,11 @@ export function notifyTransactionRefundBuilder(
 ): NotifyRefundHandler {
   return (headers: NotifyTransactionHeaders, body: NotifyTransactionBody) => {
     const {
-      "wechatpay-serial": certSerial,
       "wechatpay-timestamp": time,
       "wechatpay-nonce": nonceStr,
       "wechatpay-signature": signature,
     } = headers;
-    const c = this.checkSignature(certSerial, time, nonceStr, body, signature);
+    const c = this.checkSignature(time, nonceStr, body, signature);
     if (!c) return;
     const r = body.resource;
     const d = this.decrypto(r.nonce, r.ciphertext, r.associated_data ?? "");

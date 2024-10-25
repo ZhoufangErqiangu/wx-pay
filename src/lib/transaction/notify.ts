@@ -3,7 +3,7 @@ import { WxPay } from "..";
 
 /**
  * 签名验证
- * 
+ *
  * https://pay.weixin.qq.com/wiki/doc/apiv3/wechatpay/wechatpay4_1.shtml
  */
 export interface NotifyTransactionHeaders {
@@ -215,7 +215,7 @@ export interface NotifyTransaction {
 
 /**
  * 支付通知
- * 
+ *
  * https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_5.shtml
  */
 export type NotifyTransactionHandler = (
@@ -228,12 +228,11 @@ export function notifyTransactionBuilder(
 ): NotifyTransactionHandler {
   return (headers: NotifyTransactionHeaders, body: NotifyTransactionBody) => {
     const {
-      "wechatpay-serial": certSerial,
       "wechatpay-timestamp": time,
       "wechatpay-nonce": nonceStr,
       "wechatpay-signature": signature,
     } = headers;
-    const c = this.checkSignature(certSerial, time, nonceStr, body, signature);
+    const c = this.checkSignature(time, nonceStr, body, signature);
     if (!c) return;
     const r = body.resource;
     const d = this.decrypto(r.nonce, r.ciphertext, r.associated_data ?? "");
