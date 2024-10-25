@@ -224,7 +224,9 @@ export class WxPay {
     this.request = this.service.request;
     // auto get cert
     if (autoGetCert) {
-      this.getCerts();
+      this.getCerts().catch((err) => {
+        console.error("wx pay get certs error", err);
+      });
     }
     // debug
     this.debug = debug;
