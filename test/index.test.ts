@@ -9,10 +9,9 @@ const wxPay = new WxPay({
   apiv3Key: "",
   mchId: "1900009191",
   certSerial: "1DDE55AD98ED71D6EDD4A4A16996DE7B47773A8C",
-  wxPayCertDir: join(process.cwd(), "cert"),
-  privateKeyPath: join(process.cwd(), "cert/test.pem"),
+  wxPayPublicKeyPath: join(process.cwd(), "cert", "1900009191_wxp_pub.pem"),
+  privateKeyPath: join(process.cwd(), "cert", "test.pem"),
   notifyUrl: "",
-  autoGetCert: false,
 });
 
 // this will fail because we do not know the private key

@@ -60,7 +60,11 @@ export interface WxPayParam {
   /**
    * 商户API私钥文件地址
    *
-   * 商户申请商户API证书时，会生成商户私钥，并保存在本地证书文件夹的文件apiclient_key.pem中。私钥也可以通过工具从商户的p12证书中导出。请妥善保管好你的商户私钥文件。
+   * 商户申请商户API证书时，会生成商户私钥，并保存在本地证书文件夹的文件apiclient_key.pem中
+   *
+   * 私钥也可以通过工具从商户的p12证书中导出
+   *
+   * 请妥善保管好你的商户私钥文件
    */
   privateKeyPath: string;
   /**
@@ -68,13 +72,11 @@ export interface WxPayParam {
    */
   certSerial: string;
   /**
-   * 支持发票
+   * 支持发票, 默认false
+   *
+   * 目前没有作用
    */
   supportFapiao?: boolean;
-  /**
-   * auto get cert
-   */
-  autoGetCert?: boolean;
   /**
    * 请求的地址
    */
@@ -132,20 +134,19 @@ export class WxPay {
    */
   public checkSignature = checkSignature;
   /**
-   * 解密, api v3 key
+   * 解密, 使用APIv3密钥
    */
   public decrypto = decrypto;
   /**
-   * 加密, wx pay platform cert public key
+   * 加密, 使用微信支付公钥
    */
   public encrypto = encrypto;
   /**
-   * 解密, private key
+   * 解密, 使用商户API私钥
    */
   public decryptoByPrivateKey = decryptoByPrivateKey;
   /**
-   * jsapi下单
-   * 小程序下单
+   * jsapi下单 小程序下单
    */
   public postTransactionJsApi = postTransactionJsApi;
   /**
