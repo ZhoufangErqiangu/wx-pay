@@ -26,7 +26,6 @@
   "packageManager": "yarn@1.22.19",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "pub": "npm publish --access public",
     "push": "yarn version --patch && git push",
     "test": "ts-node ./test/index.test.ts && ts-node ./test/util.test.ts"
   },
