@@ -1,5 +1,4 @@
 import { verify } from "crypto";
-import { readFileSync } from "fs";
 import { WxPay } from ".";
 
 export function checkSignature(
@@ -9,7 +8,7 @@ export function checkSignature(
   body: unknown,
   signature: string,
 ) {
-  const publicKey = readFileSync(this.wxPayPublicKey, "utf-8");
+  const publicKey = this.wxPayPublicKey;
   const data = JSON.stringify(body);
   const v = Buffer.from(`${time}\n${nonceStr}\n${data}\n`);
   const s = Buffer.from(signature, "base64");
