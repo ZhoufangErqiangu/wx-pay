@@ -1,5 +1,5 @@
 import { constants, publicEncrypt } from "crypto";
-import { WxPay } from ".";
+import { WxPay } from "..";
 
 export function encrypto(this: WxPay, message: string) {
   const c = publicEncrypt(

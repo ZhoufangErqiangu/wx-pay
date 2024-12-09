@@ -1,5 +1,5 @@
 import { TradeState, TradeType } from ".";
-import { WxPay } from "..";
+import { WxPay } from "../..";
 
 /**
  * 签名验证

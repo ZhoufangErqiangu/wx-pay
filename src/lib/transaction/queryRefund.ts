@@ -1,5 +1,5 @@
 import { RefundChannel, RefundStatus } from ".";
-import { WxPay } from "..";
+import { WxPay } from "../..";
 
 export interface QueryRefundTransactionRes {
   /**
@@ -158,7 +158,7 @@ export interface QueryRefundTransactionRes {
 
 /**
  * 查询单笔退款
- * 
+ *
  * https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_10.shtml
  */
 export function queryRefund(this: WxPay, id: string) {

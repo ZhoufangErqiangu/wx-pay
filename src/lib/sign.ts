@@ -1,5 +1,5 @@
 import { constants, createSign } from "crypto";
-import { WxPay } from ".";
+import { WxPay } from "..";
 
 export function sign(this: WxPay, content: string) {
   const c = createSign("RSA-SHA256");

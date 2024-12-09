@@ -3,7 +3,7 @@ import {
   NotifyTransactionHeaders,
   RefundStatus,
 } from ".";
-import { WxPay } from "..";
+import { WxPay } from "../..";
 
 export interface NotifyTransactionRefund {
   /**

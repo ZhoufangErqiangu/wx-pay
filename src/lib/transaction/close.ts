@@ -1,8 +1,8 @@
-import { WxPay } from "..";
+import { WxPay } from "../..";
 
 /**
  * 关闭订单
- * 
+ *
  * https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_3.shtml
  */
 export function closeTransaction(this: WxPay, id: string) {

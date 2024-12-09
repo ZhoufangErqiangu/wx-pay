@@ -1,5 +1,5 @@
 import { verify } from "crypto";
-import { WxPay } from ".";
+import { WxPay } from "..";
 
 export function checkSignature(
   this: WxPay,

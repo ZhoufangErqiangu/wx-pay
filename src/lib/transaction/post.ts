@@ -1,5 +1,5 @@
 import { OrderPayer, PostOrderData } from ".";
-import { WxPay } from "..";
+import { WxPay } from "../..";
 
 export interface PostJSAPIData extends PostOrderData {
   /**

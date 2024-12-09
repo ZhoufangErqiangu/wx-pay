@@ -1,5 +1,5 @@
 import { createDecipheriv, privateDecrypt, constants } from "crypto";
-import { WxPay } from ".";
+import { WxPay } from "..";
 
 export function decrypto(
   this: WxPay,
