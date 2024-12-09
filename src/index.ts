@@ -161,8 +161,8 @@ export class WxPay {
           url ?? "",
           method ?? "get",
           params,
-          this.timestamp,
-          this.nonceStr,
+          timestamp(),
+          nonceStr(),
           data,
         ),
       );
@@ -263,18 +263,4 @@ export class WxPay {
    * 查询退款
    */
   public queryRefund = queryRefund;
-
-  /**
-   * 随机字符串
-   */
-  public get nonceStr() {
-    return nonceStr();
-  }
-
-  /**
-   * 时间戳
-   */
-  public get timestamp() {
-    return timestamp();
-  }
 }

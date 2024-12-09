@@ -1,4 +1,4 @@
-import assert, { notEqual, strictEqual } from "node:assert";
+import { strictEqual } from "node:assert";
 import { describe, test } from "node:test";
 import { join } from "path";
 import { WxPay } from "../src";
@@ -20,22 +20,6 @@ describe("wx pay unit test", () => {
     strictEqual(wxPay.mchId, "1900009191");
     strictEqual(wxPay.certSerial, "1DDE55AD98ED71D6EDD4A4A16996DE7B47773A8C");
     strictEqual(wxPay.notifyUrl, "https://test-url");
-  });
-
-  test("timestamp", () => {
-    const t = wxPay.timestamp;
-    const n = Date.now();
-    assert(n - parseInt(t) * 1000.0 < 1000.0, "timestamp is not correct");
-  });
-
-  test("nonce str", () => {
-    const n = wxPay.nonceStr;
-    strictEqual(n.length, 16, "nonce str length is not correct");
-  });
-  test("nonce str", () => {
-    const n1 = wxPay.nonceStr;
-    const n2 = wxPay.nonceStr;
-    notEqual(n1, n2, "nonce str is not unique");
   });
 
   test("sign", { skip: true }, () => {

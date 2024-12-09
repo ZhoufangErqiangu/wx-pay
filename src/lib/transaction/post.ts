@@ -1,5 +1,7 @@
 import { OrderPayer, PostOrderData } from ".";
 import { WxPay } from "../..";
+import { nonceStr } from "../../util/nonceStr";
+import { timestamp } from "../../util/timestamp";
 
 export interface PostJSAPIData extends PostOrderData {
   /**
@@ -29,17 +31,17 @@ export async function postTransactionJsApi(this: WxPay, data: PostJSAPIData) {
       ...data,
     },
   });
-  const timeStamp = this.timestamp;
-  const nonceStr = this.nonceStr;
+  const t = timestamp();
+  const n = nonceStr();
   const pkg = `prepay_id=${prepay_id}`;
-  const signStr = `${this.appId}\n${timeStamp}\n${nonceStr}\n${pkg}\n`;
+  const signStr = `${this.appId}\n${t}\n${n}\n${pkg}\n`;
   const paySign = this.sign(signStr);
   return {
     status,
     data: {
       appId: this.appId,
-      timeStamp,
-      nonceStr,
+      timeStamp: t,
+      nonceStr: n,
       package: pkg,
       signType: "RSA",
       paySign,
