@@ -1,6 +1,6 @@
 {
   "name": "@liuhlightning/wx-pay",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "communicate to wx pay",
   "keywords": [
     "weichat",
